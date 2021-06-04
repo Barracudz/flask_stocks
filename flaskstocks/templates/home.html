@@ -22,6 +22,66 @@
                     {% endif %}
                 </div>
 
+                <!-- Stock field 2 -->
+                <div class="form-group">
+                    {{ form.stock2.label(class="form-control-label") }}
+                    {% if form.stock2.errors %}
+                        {{ form.stock2(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.stock2.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.stock2(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <!-- Stock field 3 -->
+                <div class="form-group">
+                    {{ form.stock3.label(class="form-control-label") }}
+                    {% if form.stock3.errors %}
+                        {{ form.stock3(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.stock3.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.stock3(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <!-- Stock field 4 -->
+                <div class="form-group">
+                    {{ form.stock4.label(class="form-control-label") }}
+                    {% if form.stock4.errors %}
+                        {{ form.stock4(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.stock4.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.stock4(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
+                <!-- Stock field 5 -->
+                <div class="form-group">
+                    {{ form.stock5.label(class="form-control-label") }}
+                    {% if form.stock5.errors %}
+                        {{ form.stock5(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.stock5.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.stock5(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+
                 <!-- Starting date field -->
                 <div class="form-group">
                     {{ form.start_date.label(class="form-control-label") }}

@@ -8,6 +8,7 @@ import base64
 import pandas_datareader.data as web
 import datetime as dt
 import numpy as np
+import string, random
 
 @app.route("/", methods=['GET', 'POST'])
 @app.route("/home", methods=['GET', 'POST'])
@@ -17,8 +18,8 @@ def home():
     if form.validate_on_submit():
         start_date = form.start_date.data
         end_date = form.end_date.data
-        stock = form.stock1.data
-        img = getStockData(stock=stock, start=start_date, end=end_date)
+        stocks = [form.stock1.data, form.stock2.data, form.stock3.data, form.stock4.data, form.stock5.data]
+        img = getStockData(stocks_chosen=stocks, start=start_date, end=end_date)
         return render_template("home.html", img=img, form=form)
     return render_template("home.html", form=form)
 
@@ -36,8 +37,11 @@ def testPlot():
     return img
 
 # Function to retrieve and plot data about given stocks
-def getStockData(start, end, stock):
-    stocks = [stock]
+def getStockData(start, end, stocks_chosen):
+    stocks = stocks_chosen
+    # Filter away empty strings
+    stocks = list(filter(lambda a: a != '', stocks))
+    print(stocks)
     start = start
     end = end
     currentDate = dt.datetime.today()
@@ -60,7 +64,7 @@ def getStockData(start, end, stock):
         historicalCaps.append(dfs[i]['Close'] * shares[i])
 
     fig = Figure()
-    # Create 2 subplots with shared x-axis
+    # Create 3 subplots with shared x-axis
     ax1, ax2, ax3 = fig.subplots(3, sharex=True)
 
     stocksStr = '' # Create string with tickers
@@ -98,8 +102,12 @@ def getStockData(start, end, stock):
     ax3.tick_params(axis='x', rotation=70)
     ax3.legend(stocks)
     fig.tight_layout()
+
+    # Generate random file name. Necessary so that cached image is not constantly shown
+    file_name = ''.join(random.choice(string.ascii_letters) for i in range(10))
+    print(file_name)
     # Save plot as png to static/plots folder
-    fig.savefig("flaskstocks/static/plots/stocks_plot.png", format='png')
+    fig.savefig(f'flaskstocks/static/plots/{file_name}.png', format='png')
     # Get the image and return it
-    img = url_for('static', filename='plots/stocks_plot.png')
+    img = url_for('static', filename=f'plots/{file_name}.png')
     return img
